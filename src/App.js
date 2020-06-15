@@ -17,7 +17,7 @@ class App extends React.Component {
   componentDidMount() {
     const map = new mapboxgl.Map({
       container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/jennmez/ckbgveenp5hzy1joa87urkj4g',
       center: [this.state.lng, this.state.lat],
       zoom: this.state.zoom,
     });
@@ -29,14 +29,29 @@ class App extends React.Component {
         lng: map.getCenter().lng.toFixed(4),
         lat: map.getCenter().lat.toFixed(4),
         // getZoom(), a Mapbox GL JS method, to determine the zoom level that the map is set to.
-        zoom: map.getZoom.getZoom().toFixed(10),
+        zoom: map.getZoom().toFixed(10),
       });
+    });
+    map.on('click', (e) => {
+      let features = map.queryRenderedFeatures(e.point, {
+        layers: ['chicago-parks'],
+      });
+      if (!features.length) {
+        return;
+      }
+      let feature = features[0];
+      let popup = new mapboxgl.Popup({ offset: [0, -15] })
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML('<h3>' + feature.properties.title + '</h3>')
+        .addTo(map);
     });
   }
   render() {
     return (
       <div className="App">
+        <div className="sidebarStyle">Chicago Parks</div>
         <div ref={(el) => (this.mapContainer = el)} className="mapContainer" />
+        {/* <div ref={(el) => (this.popup = el)} className="popup" /> */}
       </div>
     );
   }

@@ -11,3 +11,24 @@
   left: 0;
   bottom: 0;
 }
+
+.h3 {
+  color: #572d0a;
+  font-family: DIN Pro Medium, Helvetica, sans-serif;
+}
+
+.sidebarStyle {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 12px;
+  background-color: #ffcf90;
+  color: #572d0a;
+  border-radius: 10px;
+  z-index: 1 !important;
+  padding: 6px;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: DIN Pro Medium, Helvetica, sans-serif;
+}
